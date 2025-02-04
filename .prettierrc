@@ -1,0 +1,14 @@
+{
+    "tabWidth": 4,
+    "singleQuote": true,
+    "semi": false,
+    "arrowParens": "avoid",
+    "trailingComma": "none",
+    "[typescriptreact]": {
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.formatOnSave": true
+    },
+    "plugins": ["prettier-plugin-tailwindcss"]
+}
