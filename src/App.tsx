@@ -1,10 +1,10 @@
-import React from 'react'
-import './App.css';
+import './App.css'
+import Tabs from './components/Tabs'
 
 const App = () => {
   return (
     <>
-      <div className='flex w-[640px] flex-col py-4 mx-auto'>
+      <div className='flex w-[640px] flex-col py-4 mx-auto bg-red-400'>
         <div className="flex flex-col gap-2 rounded-xl bg-white p-4">
           {/* header */}
           <header>
@@ -18,6 +18,7 @@ const App = () => {
           </header>
         </div>
         {/* tabs */}
+        <Tabs />
         {/* from */}
       </div>
     </>
