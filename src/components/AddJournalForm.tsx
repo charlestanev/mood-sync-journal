@@ -34,61 +34,48 @@ const AddJournalForm = () => {
 
     return (
         <>
-            <form
-                onSubmit={handleSubmit(onFormSubmit)}
-                className='flex flex-col gap-4 p-4 rounded-xl w-full'>
-
+            <form onSubmit={handleSubmit(onFormSubmit)} className="flex flex-col gap-4">
                 {/* Title */}
-                <label className="input input-bordered flex items-center gap-2 w-full">
-                    Journal Title
-                    <input
-                        type="text"
-                        className="grow"
-                        placeholder="Give your journey entry a title"
-                        {...register('title')}
-                    />
-                </label>
-                {errors.title &&
-                    <p className="text-red-500 ">{errors.title.message}</p>
-                }
+                <div>
+                    <label className="label font-semibold text-gray-700">Journal Title</label>
+                    <input type="text" className="input input-bordered w-full" {...register('title')} />
+                    {errors.title && (
+                        <p className="text-red-700 bg-red-100 border border-red-300 rounded-md px-3 py-1 mt-1 flex items-center gap-2">
+                            ⚠️ {errors.title.message}
+                        </p>
+                    )}
+                </div>
 
                 {/* Feeling */}
-                <div className="flex flex-col gap-2">
-                    <label
-                        htmlFor='emotions'
-                        className="form-control w-full flex items-center gap-2">
-                        How are you feeling today ?
-                    </label>
-                    <select
-                        id='emotions'
-                        className="select select-bordered w-full"
-                        {...register('emotion')}>
-                        <option selected>Happy</option>
+                <div>
+                    <label className="label font-semibold text-gray-700">How are you feeling today?</label>
+                    <select className="select select-bordered w-full" {...register('emotion')}>
+                        <option>Happy</option>
                         <option>Neutral</option>
                         <option>Sad</option>
                     </select>
+                    {errors.emotion && (
+                        <p className="text-red-700 bg-red-100 border border-red-300 rounded-md px-3 py-1 mt-1 flex items-center gap-2">
+                            ⚠️ {errors.emotion.message}
+                        </p>
+                    )}
                 </div>
-                {errors.emotion &&
-                    <p className="text-red-500 ">{errors.emotion.message}</p>
-                }
 
-                {/* Textarea */}
-                <textarea
-                    className="textarea textarea-bordered h-32 resize-y w-full"
-                    placeholder="Write something"
-                    rows={10}
-                    {...register('body')}
-                >
-                </textarea>
-                {errors.body &&
-                    <p className="text-red-500 ">{errors.body.message}</p>
-                }
+                {/* Journal Entry */}
+                <div>
+                    <label className="label font-semibold text-gray-700">Journal Entry</label>
+                    <textarea className="textarea textarea-bordered w-full h-32 resize-none" {...register('body')} />
+                    {errors.body && (
+                        <p className="text-red-700 bg-red-100 border border-red-300 rounded-md px-3 py-1 mt-1 flex items-center gap-2">
+                            ⚠️ {errors.body.message}
+                        </p>
+                    )}
+                </div>
 
-                <button
-                    type="button"
-                    className="btn btn-primary w-full"
-                >Save Journal</button>
-
+                {/* Submit Button */}
+                <button type="submit" className="btn btn-primary w-full">
+                    Save Journal
+                </button>
             </form>
         </>
     )
