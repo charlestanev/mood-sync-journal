@@ -5,10 +5,12 @@ import JournalList from './components/JournalList';
 import Tabs from './components/Tabs';
 
 const App = () => {
-  const [currentTab, setCurrentTab] = useState('add');
+  const [currentTab, setCurrentTab] = useState('entries');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-10 px-4"
+      style={{ color: 'red' }}
+    >
       <div className="max-w-2xl mx-auto">
         <div className="card bg-base-100 shadow-xl transition-all duration-300 hover:shadow-2xl">
           <div className="card-body p-6 md:p-8">
