@@ -1,24 +1,37 @@
+import { useState } from 'react';
 import './App.css';
 import AddJournalForm from './components/AddJournalForm';
+import JournalList from './components/JournalList';
 import Tabs from './components/Tabs';
 
 const App = () => {
+  const [currentTab, setCurrentTab] = useState('add');
+
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-200 py-10">
-      <div className="w-full max-w-2xl bg-white shadow-lg rounded-xl p-6">
-        {/* Header */}
-        <header className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Journal App</h1>
-          <p className="text-gray-600 mt-2">
-            Embrace each day with reflection: Capture your moments, chart your growth, and craft your journey, one story at a time.
-          </p>
-        </header>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-10 px-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="card bg-base-100 shadow-xl transition-all duration-300 hover:shadow-2xl">
+          <div className="card-body p-6 md:p-8">
+            {/* Header */}
+            <header className="text-center mb-8">
+              <h1 className="text-4xl font-bold text-primary mb-4 font-lora">
+                📖 MoodSync Journal
+              </h1>
+              <p className="text-gray-600 text-lg mb-2 font-medium">
+                Capture Your Journey, Reflect Your Growth
+              </p>
+              <div className="divider divider-primary opacity-50"></div>
+            </header>
 
-        {/* Tabs */}
-        <Tabs />
+            {/* Tabs */}
+            <Tabs />
 
-        {/* Form */}
-        <AddJournalForm />
+            {/* Form */}
+            <div className="flex flex-col gap-3 rounded-xl bg-gray-50 p-6 md:p-8">
+              {currentTab === 'add' ? (<AddJournalForm />) : (<JournalList />)}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
