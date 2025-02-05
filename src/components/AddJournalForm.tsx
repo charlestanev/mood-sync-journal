@@ -23,13 +23,34 @@ const AddJournalForm = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors }
     } = useForm<FormData>({
         resolver: zodResolver(schema),
     });
 
     const onFormSubmit = (data: FieldValues) => {
-        console.log(data);
+        // 1 create a uniq id for the new journal entry
+        const uuid = crypto.randomUUID();
+        data.id = uuid;
+
+        // 2 add the current timestapmp for the entry
+        const now = new Date();
+        data.createdAt = now.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+
+        // 3 retrieve the entries from storage
+        const hasJournals = localStorage.getItem('journals');
+        const journalEntries = hasJournals ? JSON.parse(hasJournals) : [];
+
+        // 4 save the new entry to the stogare
+        journalEntries.push(data);
+        const newEntry = JSON.stringify(journalEntries);
+        localStorage.setItem('journals', newEntry);
+        reset();
     }
 
     return (
@@ -64,7 +85,10 @@ const AddJournalForm = () => {
                 {/* Journal Entry */}
                 <div>
                     <label className="label font-semibold text-gray-700">Journal Entry</label>
-                    <textarea className="textarea textarea-bordered w-full h-32 resize-none" {...register('body')} />
+                    <textarea
+                        placeholder='Share your story here...'
+                        className="textarea textarea-bordered w-full h-32 resize-none"
+                        {...register('body')} />
                     {errors.body && (
                         <p className="text-red-700 bg-red-100 border border-red-300 rounded-md px-3 py-1 mt-1 flex items-center gap-2">
                             ⚠️ {errors.body.message}
