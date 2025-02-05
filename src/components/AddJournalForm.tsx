@@ -50,11 +50,31 @@ const AddJournalForm = () => {
         journalEntries.push(data);
         const newEntry = JSON.stringify(journalEntries);
         localStorage.setItem('journals', newEntry);
+        openDialog();
         reset();
+    }
+
+    const openDialog = () => {
+        const modal = document.getElementById('success_modal');
+        if (modal instanceof HTMLDialogElement) {
+            modal.showModal();
+        }
     }
 
     return (
         <>
+            <dialog id="success_modal" className="modal">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">The entry was saved sucessfully !</h3>
+                    <p className="py-4">Press ESC key or click the button below to close</p>
+                    <div className="modal-action flex justify-center gap-4">
+                        <form method="dialog flex flex-col justify-center">
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+
             <form onSubmit={handleSubmit(onFormSubmit)} className="flex flex-col gap-4">
                 {/* Title */}
                 <div>
