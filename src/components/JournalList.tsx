@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { set } from 'react-hook-form';
+import { ImSad2, ImHappy2, ImNeutral2 } from 'react-icons/im';
 
 const JournalList = () => {
     useEffect(() => {
@@ -80,7 +80,24 @@ const JournalList = () => {
             {/* Journal View Modal */}
             {journal.id && (
                 <div className="fixed inset-0 flex items-center justify-center bg-[rgb(29,35,42)] bg-opacity-60 backdrop-blur-sm z-[100] transition-opacity duration-300">
-                    <div className="relative bg-white shadow-xl rounded-lg p-6 w-full max-w-lg transform transition-all scale-100">
+                    <div className="relative bg-white shadow-xl rounded-lg p-6 w-full max-w-lg transform transition-all scale-100 overflow-hidden">
+                        {journal.emotion === '😔 Sad' ? (
+                            < ImSad2
+                                size={64}
+                                className="absolute -left-3 -top-2 z-0 text-gray-200"
+                            />
+                        ) : journal.emotion === '😊 Happy' ? (
+                            <ImHappy2
+                                size={64}
+                                className="absolute -left-3 -top-2 z-0 text-gray-200"
+                            />
+                        ) : (
+                            <ImNeutral2
+                                size={64}
+                                className="absolute -left-3 -top-2 z-0 text-gray-200"
+                            />
+                        )}
+
                         <button
                             className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
                             onClick={() => setJournal(initJournalState)}
@@ -95,13 +112,21 @@ const JournalList = () => {
                             📅 Created on {new Date(journal.createdAt).toLocaleDateString()}
                         </p>
 
-                        <div className="flex justify-end">
-                            <button
-                                className="btn btn-primary mt-4 px-6 py-2 shadow-md hover:shadow-lg transition-all w-full"
-                                onClick={() => setJournal(initJournalState)}
-                            >
-                                Close
-                            </button>
+                        <div className="flex">
+                            <div className="flex flex-row gap-2 w-full">
+                                <button
+                                    className="btn btn-primary mt-4 px-6 py-2 shadow-md hover:shadow-lg transition-all w-1/2"
+                                    onClick={() => setJournal(initJournalState)}
+                                >
+                                    Delete
+                                </button>
+                                <button
+                                    className="btn btn-primary mt-4 px-6 py-2 shadow-md hover:shadow-lg transition-all  w-1/2"
+                                    onClick={() => setJournal(initJournalState)}
+                                >
+                                    Close
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
