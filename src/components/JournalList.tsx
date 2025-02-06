@@ -38,7 +38,13 @@ const JournalList = () => {
         createdAt: string;
     }) => {
         setJournal(journal);
-        console.log(journal);
+    }
+
+    const deleteJournal = (id: string) => {
+        const newJournals = journals.filter(journal => journal.id !== id);
+        setJournals(newJournals);
+        setJournal(initJournalState);
+        localStorage.setItem('journals', JSON.stringify(newJournals));
     }
 
     return (
@@ -116,7 +122,7 @@ const JournalList = () => {
                             <div className="flex flex-row gap-2 w-full">
                                 <button
                                     className="btn btn-primary mt-4 px-6 py-2 shadow-md hover:shadow-lg transition-all w-1/2"
-                                    onClick={() => setJournal(initJournalState)}
+                                    onClick={() => deleteJournal(journal.id)}
                                 >
                                     Delete
                                 </button>
