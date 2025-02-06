@@ -17,6 +17,28 @@ const JournalList = () => {
         }
     ]);
 
+
+    const initJournalState = {
+        id: '',
+        title: '',
+        emotion: '',
+        body: '',
+        createdAt: '',
+    };
+
+    const [journal, setJournal] = useState(initJournalState);
+
+
+    const onViewJournal = (journal: {
+        id: string;
+        title: string;
+        emotion: string;
+        body: string;
+        createdAt: string;
+    }) => {
+        console.log(journal);
+    }
+
     return (
         <>
             <div className="container mx-auto px-4">
@@ -29,7 +51,8 @@ const JournalList = () => {
                         {journals.map(journal => (
                             <div
                                 key={journal.id}
-                                className="card shadow-xl bg-white rounded-lg p-6 border border-gray-200"
+                                className="card shadow-xl bg-white rounded-lg p-6 border border-gray-200 hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out hover:bg-violet-50 hover:rotate-1 hover:rotate-1 hover:cursor-pointer"
+                                onClick={() => onViewJournal(journal)}
                             >
                                 <h2 className="text-2xl font-semibold text-primary mb-2 break-words truncate">
                                     {journal.title}
@@ -50,7 +73,7 @@ const JournalList = () => {
                         ))}
                     </div>
                 )}
-            </div>
+            </div >
         </>
     );
 

@@ -63,8 +63,9 @@ const AddJournalForm = () => {
 
     return (
         <>
+            {/* Success Modal */}
             <dialog id="success_modal" className="modal">
-                <div className="modal-box text-center">
+                <div className="modal-box text-center bg-white shadow-lg rounded-lg p-6">
                     <div className="flex justify-center mb-4">
                         <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-success" viewBox="0 0 20 20" fill="currentColor">
@@ -72,30 +73,33 @@ const AddJournalForm = () => {
                             </svg>
                         </div>
                     </div>
-                    <h3 className="font-bold text-2xl mb-2">Entry Saved!</h3>
-                    <p className="py-4 text-gray-600">Your memories are safely stored</p>
+                    <h3 className="font-bold text-2xl text-gray-800 mb-2">Entry Saved!</h3>
+                    <p className="py-4 text-gray-600">Your memories are safely stored in the Local Storage</p>
                     <div className="modal-action">
                         <form method="dialog">
-                            <button className="btn btn-success btn-wide">Continue</button>
+                            <button className="btn btn-success btn-wide shadow-md hover:shadow-lg">Continue</button>
                         </form>
                     </div>
                 </div>
             </dialog>
 
-            <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
+            {/* Form Section */}
+            <form
+                onSubmit={handleSubmit(onFormSubmit)}
+                className="space-y-6 bg-white shadow-lg rounded-lg p-6 border border-gray-200">
                 {/* Title */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-lg font-medium">Journal Title</span>
+                    <label className="label pb-3">
+                        <span className="label-text text-lg font-semibold text-gray-800">Journal Title</span>
                     </label>
                     <input
                         type="text"
                         placeholder="Today's highlights..."
-                        className="input input-bordered input-lg focus:ring-2 focus:ring-primary"
-                        {...register('title')}
+                        className="input input-bordered input-lg focus:ring-2 focus:ring-primary w-full"
+                        {...register('title', { required: "Title is required!" })}
                     />
                     {errors.title && (
-                        <div className="alert alert-error mt-2 py-2">
+                        <div className="alert alert-error mt-2 py-2 flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -106,26 +110,19 @@ const AddJournalForm = () => {
 
                 {/* Feeling */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-lg font-medium">Today's Mood</span>
+                    <label className="label pb-3">
+                        <span className="label-text text-lg font-semibold text-gray-800">Today's Mood</span>
                     </label>
                     <select
-                        className="select select-bordered select-lg focus:ring-2 focus:ring-primary"
-                        {...register('emotion')}
+                        className="select select-bordered select-lg focus:ring-2 focus:ring-primary w-full"
+                        {...register('emotion', { required: "Please select your mood!" })}
                     >
-                        <option className="flex items-center gap-2">
-                            😊 Happy
-                        </option>
-                        <option>
-                            😐 Neutral
-                        </option>
-                        <option>
-                            😔 Sad
-                        </option>
+                        <option>😊 Happy</option>
+                        <option>😐 Neutral</option>
+                        <option>😔 Sad</option>
                     </select>
                     {errors.emotion && (
-                        <div className="alert alert-error mt-2 py-2">
-                            {/* Same error icon as above */}
+                        <div className="alert alert-error mt-2 py-2 flex items-center">
                             <span>{errors.emotion.message}</span>
                         </div>
                     )}
@@ -133,17 +130,16 @@ const AddJournalForm = () => {
 
                 {/* Journal Entry */}
                 <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-lg font-medium">Your Thoughts</span>
+                    <label className="label pb-3">
+                        <span className="label-text text-lg font-semibold text-gray-800">Your Thoughts</span>
                     </label>
                     <textarea
                         placeholder="Pour your heart out..."
-                        className="textarea textarea-bordered h-48 textarea-lg focus:ring-2 focus:ring-primary"
-                        {...register('body')}
+                        className="textarea textarea-bordered h-48 textarea-lg focus:ring-2 focus:ring-primary w-full"
+                        {...register('body', { required: "Journal entry is required!" })}
                     />
                     {errors.body && (
-                        <div className="alert alert-error mt-2 py-2">
-                            {/* Same error icon as above */}
+                        <div className="alert alert-error mt-2 py-2 flex items-center">
                             <span>{errors.body.message}</span>
                         </div>
                     )}
@@ -152,7 +148,7 @@ const AddJournalForm = () => {
                 {/* Submit Button */}
                 <button
                     type="submit"
-                    className="btn btn-primary btn-block btn-lg shadow-lg hover:shadow-xl transition-all"
+                    className="btn btn-primary btn-block btn-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
@@ -161,7 +157,7 @@ const AddJournalForm = () => {
                 </button>
             </form>
         </>
-    )
+    );
 }
 
 export default AddJournalForm
